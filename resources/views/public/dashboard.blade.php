@@ -2,7 +2,23 @@
 @section('title', 'Dashboard')
 @section('content')
 
-    <div class="banner position-relative" data-aos="fade-up" data-aos-delay="100" style="height: 685px; overflow: hidden;">
+    <style>
+    .hover-up {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .hover-up:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
+    }
+    .card-img-zoom {
+        transition: transform 0.5s ease;
+    }
+    .hover-up:hover .card-img-zoom {
+        transform: scale(1.08);
+    }
+    </style>
+
+    <div id="beranda" class="banner position-relative" data-aos="fade-up" data-aos-delay="100" style="height: 685px; overflow: hidden;">
         <img src="{{ asset('assets/admin/images/'. $profil->banner) }}" alt="banner"
             class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; z-index: 1;">
 
@@ -77,7 +93,7 @@
 
                 <div class="col py-4 border-end border-white border-opacity-25">
                     <h2 class="fw-bold mb-1">{{ $jumlahGuru ?? 0 }}</h2>
-                    <small>Guru & Staf</small>
+                    <small>Guru</small>
                 </div>
 
                 <div class="col py-4 border-end border-white border-opacity-25">
@@ -349,19 +365,4 @@
         </div>
     </section>
 
-<style>
-    .hover-up {
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .hover-up:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
-    }
-    .card-img-zoom {
-        transition: transform 0.5s ease;
-    }
-    .hover-up:hover .card-img-zoom {
-        transform: scale(1.08);
-    }
-</style>
 @endsection

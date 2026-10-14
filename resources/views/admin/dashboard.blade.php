@@ -13,7 +13,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-block">
-                                    <h5 class="mb-1">Selamat Datang, {{ Auth::user()->name ?? 'Admin' }}! 👋</h5>
+                                    <h5 class="mb-1">Selamat Datang, {{ Auth::user()->name ?? 'Admin' }}!</h5>
                                     <p class="text-muted mb-0">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                                 </div>
                             </div>
@@ -23,54 +23,50 @@
                     {{-- CARD STATISTIK --}}
                     <div class="row">
                         {{-- Guru --}}
-                        @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
                             <div class="col-md-6 col-xl-3">
                                 <div class="card widget-card-1">
                                     <div class="card-block-small">
-                                        <i class="icofont icofont-teacher bg-c-blue card1-icon"></i>
-                                        <span class="text-c-blue f-w-600">Total Guru</span>
+                                        <i class="icofont icofont-teacher bg-c-green card1-icon"></i>
+                                        <span class="text-c-green f-w-600">Total Guru</span>
                                         <h4>{{ $totalGuru }}</h4>
                                         <div>
                                             <span class="f-left m-t-10 text-muted">
-                                                <i class="text-c-blue f-16 icofont icofont-users m-r-10"></i>
-                                                <a href="{{ route('admin.guru.index') }}">Kelola Guru</a>
+                                                <i class="text-c-green f-16 icofont icofont-users m-r-10"></i>
+                                                <a class="text-decoration-none text-dark" href="{{ route('admin.guru.index') }}">Kelola Guru</a>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
 
                         {{-- Siswa --}}
-                        @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
                             <div class="col-md-6 col-xl-3">
                                 <div class="card widget-card-1">
                                     <div class="card-block-small">
-                                        <i class="icofont icofont-student-alt bg-c-pink card1-icon"></i>
-                                        <span class="text-c-pink f-w-600">Total Siswa</span>
+                                        <i class="icofont icofont-student-alt bg-c-yellow card1-icon"></i>
+                                        <span class="text-c-yellow f-w-600">Total Siswa</span>
                                         <h4>{{ $totalSiswa }}</h4>
                                         <div>
                                             <span class="f-left m-t-10 text-muted">
-                                                <i class="text-c-pink f-16 icofont icofont-users m-r-10"></i>
-                                                <a href="{{ route('admin.siswa.index') }}">Kelola Siswa</a>
+                                                <i class="text-c-yellow f-16 icofont icofont-users m-r-10"></i>
+                                                <a class="text-decoration-none text-dark" href="{{ route('admin.siswa.index') }}">Kelola Siswa</a>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
 
                         {{-- Ekstrakurikuler --}}
                         <div class="col-md-6 col-xl-3">
                             <div class="card widget-card-1">
                                 <div class="card-block-small">
-                                    <i class="icofont icofont-trophy-alt bg-c-green card1-icon"></i>
-                                    <span class="text-c-green f-w-600">Ekstrakurikuler</span>
+                                    <i class="icofont icofont-trophy-alt bg-c-blue card1-icon"></i>
+                                    <span class="text-c-blue f-w-600">Ekstrakurikuler</span>
                                     <h4>{{ $totalEkskul }}</h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-green f-16 icofont icofont-trophy m-r-10"></i>
-                                            <a href="{{ route('admin.ekstrakurikuler.index') }}">Kelola Ekstrakurikuler</a>
+                                            <i class="text-c-blue f-16 icofont icofont-trophy m-r-10"></i>
+                                            <a class="text-decoration-none text-dark" href="{{ route('admin.ekstrakurikuler.index') }}">Kelola Ekstrakurikuler</a>
                                         </span>
                                     </div>
                                 </div>
@@ -81,13 +77,13 @@
                         <div class="col-md-6 col-xl-3">
                             <div class="card widget-card-1">
                                 <div class="card-block-small">
-                                    <i class="icofont icofont-newspaper bg-c-yellow card1-icon"></i>
-                                    <span class="text-c-yellow f-w-600">Berita</span>
+                                    <i class="icofont icofont-newspaper bg-c-green card1-icon"></i>
+                                    <span class="text-c-green f-w-600">Berita</span>
                                     <h4>{{ $totalBerita }}</h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-yellow f-16 icofont icofont-news m-r-10"></i>
-                                            <a href="{{ route('admin.berita.index') }}">Kelola Berita</a>
+                                            <i class="text-c-green f-16 icofont icofont-news m-r-10"></i>
+                                            <a class="text-decoration-none text-dark" href="{{ route('admin.berita.index') }}">Kelola Berita</a>
                                         </span>
                                     </div>
                                 </div>
@@ -97,13 +93,13 @@
                         <div class="col-md-6 col-xl-3">
                             <div class="card widget-card-1">
                                 <div class="card-block-small">
-                                    <i class="icofont icofont-trophy-alt bg-c-green card1-icon"></i>
-                                    <span class="text-c-green f-w-600">Galeri</span>
+                                    <i class="icofont icofont-trophy-alt bg-c-pink card1-icon"></i>
+                                    <span class="text-c-pink f-w-600">Galeri</span>
                                     <h4>{{ $totalGaleri }}</h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-green f-16 icofont icofont-trophy m-r-10"></i>
-                                            <a href="{{ route('admin.galeri.index') }}">Kelola Galeri</a>
+                                            <i class="text-c-pink f-16 icofont icofont-trophy m-r-10"></i>
+                                            <a class="text-decoration-none text-dark" href="{{ route('admin.galeri.index') }}">Kelola Galeri</a>
                                         </span>
                                     </div>
                                 </div>
@@ -114,13 +110,13 @@
                             <div class="col-md-6 col-xl-3">
                                 <div class="card widget-card-1">
                                     <div class="card-block-small">
-                                        <i class="icofont icofont-newspaper bg-c-yellow card1-icon"></i>
-                                        <span class="text-c-yellow f-w-600">User</span>
+                                        <i class="icofont icofont-newspaper bg-c-pink card1-icon"></i>
+                                        <span class="text-c-pink f-w-600">User</span>
                                         <h4>{{ $totalUser }}</h4>
                                         <div>
                                             <span class="f-left m-t-10 text-muted">
-                                                <i class="text-c-yellow f-16 icofont icofont-news m-r-10"></i>
-                                                <a href="{{ route('admin.user.index') }}">Kelola User</a>
+                                                <i class="text-c-pink f-16 icofont icofont-news m-r-10"></i>
+                                                <a class="text-decoration-none text-dark" href="{{ route('admin.user.index') }}">Kelola User</a>
                                             </span>
                                         </div>
                                     </div>
@@ -130,7 +126,7 @@
                     </div>
 
                     {{-- GRAFIK + BERITA TERBARU --}}
-                    @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
+                    {{-- @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0) --}}
                         <div class="row">
                             <div class="col-md-12 col-xl-7">
                                 <div class="card">
@@ -146,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        {{-- @endif --}}
 
                         <div class="col-md-12 col-xl-5">
                             <div class="card">
@@ -168,7 +164,7 @@
                                                     @foreach($beritaTerbaru as $b)
                                                         <tr>
                                                             <td>
-                                                                <a href="{{ route('admin.berita.show', Crypt::encrypt($b->id_berita)) }}">
+                                                                <a class="text-decoration-none text-dark" href="{{ route('admin.berita.show', Crypt::encrypt($b->id_berita)) }}">
                                                                     {{ \Illuminate\Support\Str::limit($b->judul, 35) }}
                                                                 </a>
                                                                 <br>

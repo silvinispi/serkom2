@@ -134,14 +134,14 @@ class GaleriController extends Controller
     public function galeriPublic()
     {
         $title = 'Galeri';
-        $galeri = \App\Models\Galeri::latest()->get();
+        $galeri = Galeri::latest()->get();
 
         return view('public.galeri.galeri', compact('title', 'galeri'));
     }
 
     public function galeriShowPublic($slug)
     {
-        $galeri = \App\Models\Galeri::where('slug', $slug)->firstOrFail();
+        $galeri = Galeri::where('slug', $slug)->firstOrFail();
 
         $title = $galeri->judul;
 

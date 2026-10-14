@@ -11,16 +11,15 @@
         content="Admin, Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
     <link rel="icon" href="{{ asset('assets/admin/images/favicon.ico') }}" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/icon/themify-icons/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/icon/icofont/css/icofont.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/jquery.mCustomScrollbar.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
 
     <style>
         a.mobile-menu-toggle {
@@ -271,7 +270,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
+
                                     <li
                                         class="sidebar-item {{ request()->routeIs('admin.guru.*') || request()->segment(2) == 'guru' ? 'active' : '' }}">
                                         <a href="{{ route('admin.guru.index') }}">
@@ -280,8 +279,8 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                @endif
-                                @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
+
+
                                     <li
                                         class="sidebar-item {{ request()->routeIs('admin.siswa.*') || request()->segment(2) == 'siswa' ? 'active' : '' }}">
                                         <a href="{{ route('admin.siswa.index') }}">
@@ -290,7 +289,7 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                @endif
+
                                 <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Konten & Media
                                 </div>
                                 <li
@@ -305,7 +304,7 @@
                                     class="sidebar-item {{ request()->routeIs('admin.ekstrakurikuler.*') || request()->segment(2) == 'ekstrakurikuler' ? 'active' : '' }}">
                                     <a href="{{ route('admin.ekstrakurikuler.index') }}">
                                         <span class="pcoded-micon"><i class="fa-solid fa-star"></i><b>E</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Ektrakurikuler</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Ekstrakurikuler</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -429,6 +428,7 @@
     </script>
 
     <script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

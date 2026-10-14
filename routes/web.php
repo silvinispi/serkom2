@@ -23,6 +23,7 @@ Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'ekstrakurikul
 Route::get('/ekstrakurikuler/{id}', [EkstrakurikulerController::class, 'ekstrakurikulerShowPublic'])->name('public.ekstrakurikuler.show');
 Route::get('/galeri', [GaleriController::class, 'galeriPublic'])->name('public.galeri');
 Route::get('/galeri/{slug}', [GaleriController::class, 'galeriShowPublic'])->name('public.galeri.show');
+Route::get('/saya', [DashboardController::class, 'profilSaya'])->name('public.saya');
 
 // AUTENTIKASI (HANYA BISA DIAKSES JIKA BELUM LOGIN)
 Route::middleware('guest')->group(function () {
@@ -77,10 +78,29 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::delete('/{id}', [GaleriController::class, 'destroy'])->name('admin.galeri.delete');
     });
 
-    // Profil User
-    Route::get('/profil-user', [ProfilUserController::class, 'index'])->name('admin.profilUser.index');
-    Route::get('/profil-user/edit', [ProfilUserController::class, 'edit'])->name('admin.profilUser.edit');
-    Route::put('/profil-user/update', [ProfilUserController::class, 'update'])->name('admin.profilUser.update');
+
+    Route::prefix('profil-user')->group(function () {
+        Route::get('/', [ProfilUserController::class, 'index'])->name('admin.profilUser.index');
+        Route::get('/edit', [ProfilUserController::class, 'edit'])->name('admin.profilUser.edit');
+        Route::put('/update', [ProfilUserController::class, 'update'])->name('admin.profilUser.update');
+    });
+
+    Route::prefix('guru')->group(function () {
+        Route::get('/', [GuruController::class, 'index'])->name('admin.guru.index');
+        Route::get('/add-edit/{id?}', [GuruController::class, 'addEdit'])->name('admin.guru.addEdit');
+        Route::post('/save/{id?}', [GuruController::class, 'save'])->name('admin.guru.save');
+        Route::get('/{id}', [GuruController::class, 'show'])->name('admin.guru.show');
+        Route::delete('/{id}', [GuruController::class, 'destroy'])->name('admin.guru.delete');
+    });
+
+    Route::prefix('siswa')->group(function () {
+        Route::get('/', [SiswaController::class, 'index'])->name('admin.siswa.index');
+        Route::get('/add-edit/{id?}', [SiswaController::class, 'addEdit'])->name('admin.siswa.addEdit');
+        Route::post('/save/{id?}', [SiswaController::class, 'save'])->name('admin.siswa.save');
+        Route::get('/{id}', [SiswaController::class, 'show'])->name('admin.siswa.show');
+        Route::delete('/{id}', [SiswaController::class, 'destroy'])->name('admin.siswa.delete');
+    });
+
 
     // =====================================================================
     // FITUR KHUSUS ADMIN (Operator DILARANG)
@@ -95,26 +115,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/{id}', [UserController::class, 'show'])->name('admin.user.show');
             Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
         });
-
-        // 6. Guru
-        Route::prefix('guru')->group(function () {
-            Route::get('/', [GuruController::class, 'index'])->name('admin.guru.index');
-            Route::get('/add-edit/{id?}', [GuruController::class, 'addEdit'])->name('admin.guru.addEdit');
-            Route::post('/save/{id?}', [GuruController::class, 'save'])->name('admin.guru.save');
-            Route::get('/{id}', [GuruController::class, 'show'])->name('admin.guru.show');
-            Route::delete('/{id}', [GuruController::class, 'destroy'])->name('admin.guru.delete');
-        });
-
-        // 7. Siswa
-        Route::prefix('siswa')->group(function () {
-            Route::get('/', [SiswaController::class, 'index'])->name('admin.siswa.index');
-            Route::get('/add-edit/{id?}', [SiswaController::class, 'addEdit'])->name('admin.siswa.addEdit');
-            Route::post('/save/{id?}', [SiswaController::class, 'save'])->name('admin.siswa.save');
-            Route::get('/{id}', [SiswaController::class, 'show'])->name('admin.siswa.show');
-            Route::delete('/{id}', [SiswaController::class, 'destroy'])->name('admin.siswa.delete');
-        });
-
     });
-
 });
-

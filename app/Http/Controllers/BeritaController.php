@@ -7,21 +7,41 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Berita::with('user')->latest()->get();
+        $user = Auth::user();
+
+        if (strcasecmp($user->role, 'admin') === 0) {
+            $berita = Berita::with('user')->latest()->get();
+        } else {
+            $berita = Berita::with('user')
+                ->where('id_user', $user->id_user)
+                ->latest()
+                ->get();
+        }
+
         return view('admin.berita.index', compact('berita'));
     }
 
     public function addEdit($id = null)
     {
         try {
-            $berita = $id
-                ? Berita::where('id_berita', Crypt::decrypt($id))->firstOrFail()
-                : null;
+            if ($id) {
+                $id_decrypt = Crypt::decrypt($id);
+                $query = Berita::where('id_berita', $id_decrypt);
+
+                if (strcasecmp(Auth::user()->role, 'admin') !== 0) {
+                    $query->where('id_user', Auth::user()->id_user);
+                }
+
+                $berita = $query->firstOrFail();
+            } else {
+                $berita = null;
+            }
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.berita.index')
@@ -41,7 +61,13 @@ class BeritaController extends Controller
         if ($id) {
             try {
                 $id_decrypt = Crypt::decrypt($id);
-                $berita = Berita::where('id_berita', $id_decrypt)->firstOrFail();
+                $query = Berita::where('id_berita', $id_decrypt);
+
+                if (strcasecmp(Auth::user()->role, 'admin') !== 0) {
+                    $query->where('id_user', Auth::user()->id_user);
+                }
+
+                $berita = $query->firstOrFail();
             } catch (\Exception $e) {
                 return redirect()
                     ->route('admin.berita.index')
@@ -68,15 +94,21 @@ class BeritaController extends Controller
             'gambar.max'       => 'Ukuran gambar maksimal 2MB.',
             'id_user.required' => 'Penulis wajib dipilih.',
             'id_user.exists'   => 'Penulis yang dipilih tidak valid.',
-            'slug.unique' => 'Slug berita sudah digunakan. Silahkan gunakan judul yang berbeda'
+            'slug.unique'      => 'Slug berita sudah digunakan. Silakan gunakan judul yang berbeda.',
         ]);
 
         $berita->judul   = $request->judul;
         $berita->slug    = $slug;
         $berita->isi     = $request->isi;
         $berita->tanggal = $request->tanggal;
-        $berita->id_user = $request->id_user;
-        $berita->status = $request->status;
+        $berita->status  = $request->status;
+
+        // Operator otomatis jadi penulis, admin bisa pilih
+        if (strcasecmp(Auth::user()->role, 'admin') === 0) {
+            $berita->id_user = $request->id_user;
+        } else {
+            $berita->id_user = Auth::user()->id_user;
+        }
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
@@ -105,9 +137,14 @@ class BeritaController extends Controller
     public function show($id)
     {
         try {
-            $berita = Berita::with('user')
-                ->where('id_berita', Crypt::decrypt($id))
-                ->firstOrFail();
+            $query = Berita::with('user')
+                ->where('id_berita', Crypt::decrypt($id));
+
+            if (strcasecmp(Auth::user()->role, 'admin') !== 0) {
+                $query->where('id_user', Auth::user()->id_user);
+            }
+
+            $berita = $query->firstOrFail();
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.berita.index')
@@ -120,7 +157,13 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         try {
-            $berita = Berita::where('id_berita', Crypt::decrypt($id))->firstOrFail();
+            $query = Berita::where('id_berita', Crypt::decrypt($id));
+
+            if (strcasecmp(Auth::user()->role, 'admin') !== 0) {
+                $query->where('id_user', Auth::user()->id_user);
+            }
+
+            $berita = $query->firstOrFail();
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.berita.index')
@@ -138,25 +181,23 @@ class BeritaController extends Controller
             ->with('success', 'Data berita berhasil dihapus.');
     }
 
-    // Buat dashboard (3 berita)
     public function beritaDashboard()
     {
         $berita = Berita::latest()->take(3)->get();
         return $berita;
     }
 
-    // Buat halaman berita (semua berita)
     public function beritaPublic()
     {
-        $berita = \App\Models\Berita::where('status', 'publish')->latest()->get();
+        $berita = Berita::where('status', 'publish')->latest()->get();
         $title = 'Berita';
-        // $berita = Berita::latest()->get();
+
         return view('public.berita.berita', compact('title', 'berita'));
     }
 
     public function beritaShowPublic($slug)
     {
-        $berita = \App\Models\Berita::where('slug', $slug)->firstOrFail();
+        $berita = Berita::where('slug', $slug)->firstOrFail();
 
         $title = $berita->judul;
 

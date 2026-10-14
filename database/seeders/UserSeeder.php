@@ -30,6 +30,15 @@ class UserSeeder extends Seeder
                 'role' => 'operator',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'name' => 'Isna Qudsiatul Aulia',
+                'foto' => 'isna.jpeg',
+                'username' => 'operator2',
+                'password' => bcrypt('operator321'),
+                'role' => 'operator',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

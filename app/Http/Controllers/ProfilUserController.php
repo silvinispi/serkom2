@@ -61,10 +61,12 @@ class ProfilUserController extends Controller
             $user->foto = $filename;
         }
 
-        $user->save();
+        // $user->save();
 
         return redirect()
             ->route('admin.profilUser.index')
             ->with('success', 'Profil berhasil diperbarui.');
     }
+
+    
 }

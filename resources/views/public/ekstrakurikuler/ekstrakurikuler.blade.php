@@ -2,6 +2,16 @@
 @section('title', 'Ekstrakurikuler')
 @section('content')
 
+    <style>
+        .hover-up {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hover-up:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
+        }
+    </style>
     <section class="py-5" data-aos="fade-up" data-aos-delay="100">
         <div class="container">
 
@@ -12,7 +22,9 @@
                 <h2 class="fw-bold text-success mb-3" style="font-size: 36px;">
                     Ekstrakurikuler Sekolah
                 </h2>
-                    <div class="mx-auto" style="width: 200px; height: 3px; background: linear-gradient(to right, transparent, #f5c518, transparent);"></div>
+                <div class="mx-auto"
+                    style="width: 200px; height: 3px; background: linear-gradient(to right, transparent, #f5c518, transparent);">
+                </div>
             </div>
 
             <div class="row g-4">
@@ -24,8 +36,7 @@
                                 <div class="col-md-5 d-flex align-items-center justify-content-center p-3">
                                     @if ($e->gambar && file_exists(public_path('assets/admin/images/' . $e->gambar)))
                                         <img src="{{ asset('assets/admin/images/' . $e->gambar) }}"
-                                            alt="{{ $e->nama_ekskul }}"
-                                            class="img-fluid rounded-3"
+                                            alt="{{ $e->nama_ekskul }}" class="img-fluid rounded-3"
                                             style="max-width: 100%; max-height: 180px; object-fit: contain;">
                                     @else
                                         <div class="d-flex align-items-center justify-content-center bg-secondary bg-opacity-25 rounded-3 w-100"
@@ -60,13 +71,4 @@
         </div>
     </section>
 
-    <style>
-        .hover-up {
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .hover-up:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
-        }
-    </style>
 @endsection

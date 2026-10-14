@@ -1,8 +1,8 @@
 @extends('layouts.landing')
-@section('title', 'Guru')
+@section('title', 'Detail Guru')
 @section('content')
 
-<section class="py-5">
+<section class="py-5" data-aos="fade-up" data-aos-delay="100">
     <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('public.guru') }}" class="btn btn-success mt-4">
+                    <a href="javascript:history.back()" class="btn btn-success mt-4">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>

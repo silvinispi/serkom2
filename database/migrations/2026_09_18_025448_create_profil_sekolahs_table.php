@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_profil');
             $table->string('nama_sekolah', 40);
             $table->string('kepala_sekolah', 40);
-            $table->string('nip', 10);
+            $table->string('nip', 50);
             $table->string('foto', 100)->nullable();
             $table->string('logo', 100)->nullable();
             $table->string('npsn', 10);

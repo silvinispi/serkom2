@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <title>MTS PSA Nurul Ihsan | @yield('title')</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title ?? 'MTS PSA Nurul Ihsan' }}</title>
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="{{ asset('assets/aos.css') }}">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -70,6 +71,12 @@
                         <a class="nav-link fw-medium {{ request()->routeIs('public.galeri*') ? 'active' : '' }}"
                             href="{{ route('public.galeri') }}">
                             <i class="fa-solid fa-photo-film"></i> Galeri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium {{ request()->routeIs('public.saya') ? 'active' : '' }}"
+                            href="{{ route('public.saya') }}">
+                            <i class="fa-solid fa-address-card"></i> Profil Saya
                         </a>
                     </li>
                 </ul>
@@ -154,7 +161,7 @@
 
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ asset('assets/aos.js') }}"></script>
     <script>
         AOS.init({
             duration: 800,

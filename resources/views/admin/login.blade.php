@@ -11,135 +11,17 @@
     <link rel="icon" href="{{ asset('assets/admin/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/icon/themify-icons/themify-icons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/icon/icofont/css/icofont.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
 
     <style>
-        /* ===== BACKGROUND LOGIN ===== */
-        html, body,
-        body.fix-menu,
-        body.login-page {
+        body {
             background:
                 linear-gradient(rgba(0, 30, 15, 0.75), rgba(0, 30, 15, 0.75)),
-                url('{{ asset("assets/admin/images/logo2.png") }}') center/cover no-repeat fixed !important;
-            background-size: cover !important;
+                url('{{ asset('assets/admin/images/logo2.png') }}') center/cover no-repeat fixed;
             min-height: 100vh;
             margin: 0;
-            padding: 0;
         }
-
-        section.login,
-        section.login.bg-primary,
-        section.login.common-img-bg {
-            background: transparent !important;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* ===== CARD LOGIN — TANPA SHADOW ===== */
-        .login-card,
-        .login-card .auth-box,
-        .card,
-        .card-block {
-            background: #ffffff !important;
-            border-radius: 16px !important;
-            box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            -moz-box-shadow: none !important;
-            border: none !important;
-            outline: none !important;
-        }
-
-        .login-card {
-            padding: 0 !important;
-            margin: 0 !important;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Matikan semua pseudo-element pembawa shadow bawaan template */
-        .login-card::before,
-        .login-card::after,
-        .auth-box::before,
-        .auth-box::after {
-            display: none !important;
-            content: none !important;
-            box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            border: none !important;
-        }
-
-        /* Form */
-        .login-card form {
-            margin: 0 !important;
-            padding: 0 !important;
-            border: none !important;
-        }
-
-        .login-card .auth-box {
-            padding: 35px 35px !important;
-        }
-
-        /* Logo */
-        .login-logo {
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .login-logo img {
-            max-width: 90px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .txt-primary {
-            color: #1a7f4e !important;
-            font-weight: 700;
-        }
-
-        /* Input & Label - Rata Kiri */
-        .login-card .mb-3 {
-            text-align: left !important;
-        }
-        .login-card .form-label {
-            font-size: 13px;
-            margin-bottom: 5px;
-            display: block;
-            text-align: left !important;
-        }
-        .login-card .form-control {
-            border-radius: 8px;
-            padding: 8px 12px;
-            height: auto;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            text-align: left !important;
-        }
-        .login-card .form-control:focus {
-            border-color: #1a7f4e;
-            box-shadow: 0 0 0 3px rgba(26,127,78,0.15) !important;
-        }
-
-        /* Checkbox Remember Me - Rata Kiri */
-        /* .login-card .form-check {
-            text-align: left !important;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-left: 0 !important;
-        } */
-        /* .login-card .form-check-input {
-            float: none !important;
-            margin-left: 0 !important;
-            margin-top: 0 !important;
-        }
-        .login-card .form-check-label {
-            text-align: left !important;
-            font-size: 13px;
-            margin-bottom: 0 !important;
-        } */
-
-        /* Tombol */
         .btn-login {
             background: #1a7f4e;
             border-color: #1a7f4e;
@@ -149,84 +31,77 @@
             padding: 10px;
             font-size: 15px;
             transition: 0.3s;
-            text-align: center; 
-            align-items: center;
         }
         .btn-login:hover {
             background: #14643c;
             border-color: #14643c;
             color: #fff;
         }
-
-        /* Footer */
-        .login-footer { font-size: 13px; color: #666; }
-
-        /* Hilangkan md-line */
-        .md-line { display: none; }
-
-        /* Responsive */
-        @media (max-width: 576px) {
-            .login-logo img { max-width: 75px; }
-            .login-card .auth-box { padding: 25px 20px !important; }
+        .login-card .form-control:focus {
+            border-color: #1a7f4e;
+            box-shadow: 0 0 0 3px rgba(26, 127, 78, 0.15) !important;
         }
     </style>
 </head>
 
-<body class="fix-menu login-page">
+<body>
 
-    <section class="login d-flex align-items-center justify-content-center">
+    <section class="d-flex align-items-center justify-content-center min-vh-100 py-4">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-5 col-lg-4 col-sm-8">
 
-                    <div class="login-card">
-                        <form class="md-float-material" action="{{ route('proses.login') }}" method="POST">
+                    <div class="card border-0 rounded-4 overflow-hidden login-card">
+                        <form action="{{ route('proses.login') }}" method="POST">
                             @csrf
 
-                            <div class="auth-box">
+                            <div class="card-body p-4 p-md-5">
 
-                                {{-- LOGO --}}
-                                <div class="login-logo">
-                                    <img src="{{ asset('assets/admin/images/ni.png') }}" alt="Logo MTS PSA Nurul Ihsan">
+                                <div class="text-center mb-3">
+                                    <img src="{{ asset('assets/admin/images/ni.png') }}" alt="Logo MTS PSA Nurul Ihsan"
+                                        style="max-width: 90px;">
                                 </div>
 
-                                {{-- JUDUL & DESKRIPSI (Diberi ID agar bisa dipaksa JS) --}}
-                                <h3 id="login-title" class="txt-primary mb-1" style="font-size: 22px;">Sign In</h3>
-                                <p id="login-desc" class="text-muted mb-4" style="font-size: 13px;">Silakan masuk untuk mengelola website</p>
+                                <h3 class="text-center fw-bold mb-1" style="color: #1a7f4e; font-size: 22px;">
+                                    Sign In
+                                </h3>
+                                <p class="text-center text-muted mb-4" style="font-size: 13px;">
+                                    Silakan masuk untuk mengelola website
+                                </p>
 
-                                {{-- USERNAME --}}
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Masukkan username" required>
+                                <div class="mb-3 text-start">
+                                    <label class="form-label fw-semibold small">Username</label>
+                                    <input type="text" name="username" class="form-control"
+                                        placeholder="Masukkan username" required
+                                        style="border-radius: 10px; padding: 10px 14px; font-size: 14px;">
                                 </div>
 
-                                {{-- PASSWORD --}}
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Password</label>
+                                <div class="mb-3 text-start">
+                                    <label class="form-label fw-semibold small">Password</label>
                                     <div style="position: relative;">
-                                        <input type="password" name="password" id="input-password" class="form-control" placeholder="Masukkan password" required style="padding-right: 40px;">
+                                        <input type="password" name="password" id="input-password" class="form-control"
+                                            placeholder="Masukkan password" required
+                                            style="border-radius: 10px; padding: 10px 45px 10px 14px; font-size: 14px;">
+
                                         <button type="button" id="toggle-password" tabindex="-1"
-                                            style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; z-index: 10; cursor: pointer;">
-                                            <i class="icofont icofont-eye" id="eye-icon" style="color: #999; font-size: 16px;"></i>
+                                            style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: transparent; border: none; padding: 0; z-index: 10; cursor: pointer;">
+                                            <i class="fa-solid fa-eye-slash" id="eye-icon"
+                                                style="color: #908f8f; font-size: 16px;"></i>
                                         </button>
                                     </div>
                                 </div>
 
-                                {{-- REMEMBER --}}
-                                {{-- <div class="form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="remember">
-                                    <label class="form-check-label" for="remember">Remember me</label>
-                                </div> --}}
-
-                                {{-- TOMBOL --}}
-                                <button type="submit" class="btn btn-login w-100 mb-3">Sign In</button>
+                                <button type="submit" class="btn btn-login w-100 mb-3 text-center">
+                                    Sign In
+                                </button>
 
                                 <hr class="my-3">
 
-                                <div class="text-center login-footer">
-                                    <p class="mb-1">Terima kasih telah berkunjung.</p>
-                                    <p class="mb-0 fw-bold" style="color: #1a7f4e;">MTS PSA Nurul Ihsan</p>
+                                <div class="text-center">
+                                    <p class="mb-1 small text-muted">Terima kasih telah berkunjung.</p>
+                                    <p class="mb-0 small fw-bold" style="color: #1a7f4e;">MTS PSA Nurul Ihsan</p>
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -236,50 +111,34 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('assets/admin/js/jquery/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/popper.js/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/modernizr/modernizr.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/modernizr/css-scrollbars.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/admin/js/common-pages.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/popper.js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/modernizr/modernizr.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/modernizr/css-scrollbars.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/common-pages.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Script untuk Toggle Password
             var input = document.getElementById('input-password');
-            var btn   = document.getElementById('toggle-password');
-            var icon  = document.getElementById('eye-icon');
+            var btn = document.getElementById('toggle-password');
+            var icon = document.getElementById('eye-icon');
 
             if (btn && input && icon) {
                 btn.addEventListener('click', function() {
                     if (input.type === 'password') {
                         input.type = 'text';
-                        icon.classList.remove('icofont-eye');
-                        icon.classList.add('icofont-eye-blocked');
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
                     } else {
                         input.type = 'password';
-                        icon.classList.remove('icofont-eye-blocked');
-                        icon.classList.add('icofont-eye');
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
                     }
                 });
             }
-
-            // MEMAKSA JUDUL SIGN IN KE TENGAH MENGALAHKAN SCRIPT TEMPLATE
-            setTimeout(function() {
-                var title = document.getElementById('login-title');
-                var desc = document.getElementById('login-desc');
-                if (title) {
-                    title.style.setProperty('text-align', 'center', 'important');
-                    title.style.setProperty('width', '100%', 'important');
-                }
-                if (desc) {
-                    desc.style.setProperty('text-align', 'center', 'important');
-                    desc.style.setProperty('width', '100%', 'important');
-                }
-            }, 50); // Dijalankan setelah script bawaan selesai
         });
     </script>
 </body>

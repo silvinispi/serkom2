@@ -93,7 +93,7 @@
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $b->judul }}</td>
-                                                    <td>{{ \Illuminate\Support\Str::limit($b->isi, 50) }}</td>
+                                                    <td>{{ \Illuminate\Support\Str::limit($b->isi, 100) }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($b->tanggal)->format('d-m-Y') }}</td>
                                                     <td class="py-3">
                                                         @if ($b->gambar && file_exists(public_path('assets/admin/images/' . $b->gambar)))

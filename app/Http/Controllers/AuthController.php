@@ -14,13 +14,12 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Validasi input
+
         $credentials = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
         ]);
 
-        // Cek manual apakah user dengan username ini ada dan statusnya aktif
         $user = \App\Models\User::where('username', $request->username)->first();
 
         if ($user && $user->status === 'tidak_aktif') {
@@ -29,14 +28,12 @@ class AuthController extends Controller
             ])->onlyInput('username');
         }
 
-        // Coba login pakai Auth::attempt
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
 
             return redirect()->intended('/admin');
         }
 
-        // Kalau gagal
         return back()->withErrors([
             'username' => 'Username atau password salah.',
         ])->onlyInput('username');

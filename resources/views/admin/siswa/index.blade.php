@@ -57,7 +57,6 @@
                                             <a href="{{ route('admin.dashboard') }}"><i
                                                     class="icofont icofont-home"></i></a>
                                         </li>
-                                        {{-- <li class="breadcrumb-item"><a href="#!">Admin</a></li> --}}
                                         <li class="breadcrumb-item"><a href="#!">Siswa</a></li>
                                     </ul>
                                 </div>
@@ -82,6 +81,7 @@
                                                 <th>No</th>
                                                 <th>NISN</th>
                                                 <th>Nama</th>
+                                                <th>Kelas</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>Tahun Masuk</th>
                                                 <th class="text-center">Aksi</th>
@@ -93,6 +93,7 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $s->nisn }}</td>
                                                     <td>{{ $s->nama_siswa }}</td>
+                                                    <td>{{ $s->nama_kelas }}</td>      
                                                     <td>{{ $s->jenis_kelamin }}</td>
                                                     <td>{{ $s->tahun_masuk }}</td>
                                                     <td class="text-center">
@@ -118,7 +119,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="6" class="text-center">Belum ada data siswa.</td>
+                                                    <td colspan="7" class="text-center">Belum ada data siswa.</td>  {{-- ✅ 7 --}}
                                                 </tr>
                                             @endforelse
                                         </tbody>

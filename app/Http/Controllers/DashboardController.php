@@ -8,32 +8,52 @@ use App\Models\Ekstrakurikuler;
 use App\Models\Berita;
 use App\Models\Galeri;
 use App\Models\User;
+use App\Models\ProfilSekolah;
+use App\Models\profilSaya;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Data statistik
+        $user = Auth::user();
+        $isAdmin = strcasecmp($user->role, 'admin') === 0;
+
+        // Data statistik (semua role lihat angka total yang sama)
         $totalGuru   = Guru::count();
         $totalSiswa  = Siswa::count();
         $totalEkskul = Ekstrakurikuler::count();
-        $totalBerita = Berita::count();
-        $totalUser = User::count();
+        $totalUser   = User::count();
         $totalGaleri = Galeri::count();
 
-        // Siswa per tahun masuk (buat grafik)
+        // Statistik berita — admin: semua, operator: cuma miliknya
+        if ($isAdmin) {
+            $totalBerita = Berita::count();
+        } else {
+            $totalBerita = Berita::where('id_user', $user->id_user)->count();
+        }
+
+        // Siswa per tahun masuk (grafik)
         $siswaPerTahun = Siswa::selectRaw('tahun_masuk, COUNT(*) as total')
             ->groupBy('tahun_masuk')
             ->orderBy('tahun_masuk', 'asc')
             ->get();
 
-        // Berita terbaru (5)
-        $beritaTerbaru = Berita::with('user')
-            ->orderBy('tanggal', 'desc')
-            ->limit(5)
-            ->get();
+        // Berita terbaru — admin: semua, operator: cuma miliknya
+        if ($isAdmin) {
+            $beritaTerbaru = Berita::with('user')
+                ->orderBy('tanggal', 'desc')
+                ->limit(5)
+                ->get();
+        } else {
+            $beritaTerbaru = Berita::with('user')
+                ->where('id_user', $user->id_user)
+                ->orderBy('tanggal', 'desc')
+                ->limit(5)
+                ->get();
+        }
 
-        // Galeri terbaru (5)
+        // Galeri terbaru (semua role lihat sama)
         $galeriTerbaru = Galeri::orderBy('tanggal', 'desc')
             ->limit(4)
             ->get();
@@ -47,8 +67,8 @@ class DashboardController extends Controller
             'siswaPerTahun' => $siswaPerTahun,
             'beritaTerbaru' => $beritaTerbaru,
             'galeriTerbaru' => $galeriTerbaru,
-            'totalGaleri' => $totalGaleri,
-            'totalUser'  => $totalUser,
+            'totalGaleri'   => $totalGaleri,
+            'totalUser'     => $totalUser,
         ];
 
         return view('admin.dashboard', $data);
@@ -56,22 +76,28 @@ class DashboardController extends Controller
 
     public function indexPublic()
     {
-    $data = [
-        'title'           => 'Dashboard',
+        $data = [
+            'title'           => 'Dashboard',
 
-        'jumlahSiswa'     => \App\Models\Siswa::count(),
-        'jumlahGuru'      => \App\Models\Guru::count(),
-        'jumlahEkskul'    => \App\Models\Ekstrakurikuler::count(),
-        'jumlahBerita'    => \App\Models\Berita::count(),
-        'jumlahGaleri'    => \App\Models\Galeri::count(),
+            'jumlahSiswa'     => Siswa::count(),
+            'jumlahGuru'      => Guru::count(),
+            'jumlahEkskul'    => Ekstrakurikuler::count(),
+            'jumlahBerita'    => Berita::count(),
+            'jumlahGaleri'    => Galeri::count(),
 
-        'guru'            => \App\Models\Guru::latest()->take(4)->get(),
-        'ekstrakurikuler' => \App\Models\Ekstrakurikuler::latest()->take(2)->get(),
-        'berita'          => \App\Models\Berita::where('status', 'publish')->latest()->take(3)->get(),
-        'galeri'          => \App\Models\Galeri::latest()->take(3)->get(),
-        'profil'          => \App\Models\ProfilSekolah::first(),
-    ];
+            'guru'            => Guru::latest()->take(4)->get(),
+            'ekstrakurikuler' => Ekstrakurikuler::latest()->take(2)->get(),
+            'berita'          => Berita::where('status', 'publish')->latest()->take(3)->get(),
+            'galeri'          => Galeri::latest()->take(3)->get(),
+            'profil'          => ProfilSekolah::first(),
+        ];
 
         return view('public.dashboard', $data);
     }
+
+    public function profilSaya()
+    {
+        return view('public.saya');
+    }
 }
+    

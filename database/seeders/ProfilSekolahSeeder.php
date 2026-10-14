@@ -16,8 +16,8 @@ class ProfilSekolahSeeder extends Seeder
         ProfilSekolah::create([
             'nama_sekolah' => 'MTS PSA Nurul Ihsan',
             'kepala_sekolah' => 'Yeti Rohayati S.Pdi',
-            'nip' => '12345',
-            'foto' => 'kepsek.png',
+            'nip' => '198501012010011001',
+            'foto' => 'buyeti.jpeg',
             'logo' => 'ni.png',
             'npsn' => '20278496',
             'alamat' => 'Kp. Cicangkudu, Desa Margajaya, Kec.Mangunreja, Kab. Tasikmalaya, Jawa Barat, Indonesia',

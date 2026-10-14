@@ -2,6 +2,22 @@
 @section('title', 'Berita')
 @section('content')
 
+<style>
+    .hover-up {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .hover-up:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
+    }
+    .card-img-zoom {
+        transition: transform 0.5s ease;
+    }
+    .hover-up:hover .card-img-zoom {
+        transform: scale(1.08);
+    }
+</style>
+
 <section class="py-5 bg-light">
     <div class="container">
 
@@ -60,20 +76,4 @@
         </div>
     </div>
 </section>
-
-<style>
-    .hover-up {
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .hover-up:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
-    }
-    .card-img-zoom {
-        transition: transform 0.5s ease;
-    }
-    .hover-up:hover .card-img-zoom {
-        transform: scale(1.08);
-    }
-</style>
 @endsection

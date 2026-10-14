@@ -136,7 +136,7 @@ class EkstrakurikulerController extends Controller
     public function ekstrakurikulerPublic()
     {
         $title = 'ekstrakurikuler';
-        $ekstrakurikuler = \App\Models\Ekstrakurikuler::latest()->get();
+        $ekstrakurikuler = Ekstrakurikuler::latest()->get();
 
         return view('public.ekstrakurikuler.ekstrakurikuler', compact('title', 'ekstrakurikuler'));
     }

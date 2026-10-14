@@ -69,6 +69,17 @@ class BeritaSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'judul' => 'Peringatan Maulid Nabi Muhammad SAW 1447 H Berbarengan dengan Haflah Pesantren Nurul Ihsan',
+                'slug' => Str::slug('Peringatan Maulid Nabi Muhammad SAW 1447 H Berbarengan dengan Haflah Pesantren Nurul Ihsan'),
+                'isi' => 'MTS PSA Nurul Ihsan bersama Pesantren Satu Atap Nurul Ihsan akan menyelenggarakan peringatan Maulid Nabi Muhammad SAW 1447 H yang digabungkan dengan Haflah Akhirussanah Pesantren Nurul Ihsan. Acara akan dilaksanakan pada Sabtu, 15 November 2026, pukul 07.30 WIB hingga selesai di Lapangan Utama MTS PSA Nurul Ihsan. Rangkaian acara meliputi pembacaan sholawat bersama, tilawah Al-Qur\'an, tausiyah agama, penampilan santri, doa bersama, dan ramah tamah. Kami mengundang seluruh wali murid, orang tua santri, alumni, tokoh masyarakat, serta warga sekitar untuk hadir dan meramaikan acara ini. Kehadiran dan doa Bapak/Ibu/Saudara sangat berarti bagi kami.',
+                'tanggal' => '2026-11-10',
+                'gambar' => 'jadwal.jpeg',
+                'id_user' => 3,
+                'status' => 'publish',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

@@ -2,6 +2,22 @@
 @section('title', 'Guru')
 @section('content')
 
+<style>
+    .hover-up {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .hover-up:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
+    }
+    .card-img-zoom {
+        transition: transform 0.5s ease;
+    }
+    .hover-up:hover .card-img-zoom {
+        transform: scale(1.08);
+    }
+</style>
+
 <section class="py-5" data-aos="fade-up" data-aos-delay="100">
     <div class="container">
 
@@ -10,7 +26,7 @@
                 PROFIL TENAGA PENDIDIK
             </p>
             <h2 class="fw-bold text-success mb-3" style="font-size: 36px;">
-                Guru & Staf Kami
+                Pendidik yang berdedikasi
             </h2>
             <div class="mx-auto" style="width: 200px; height: 3px; background: linear-gradient(to right, transparent, #f5c518, transparent);"></div>
 
@@ -54,20 +70,4 @@
         </div>
     </div>
 </section>
-
-<style>
-    .hover-up {
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .hover-up:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(25, 135, 84, 0.2) !important;
-    }
-    .card-img-zoom {
-        transition: transform 0.5s ease;
-    }
-    .hover-up:hover .card-img-zoom {
-        transform: scale(1.08);
-    }
-</style>
 @endsection

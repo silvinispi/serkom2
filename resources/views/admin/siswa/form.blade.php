@@ -26,6 +26,7 @@
                             <form action="{{ route('admin.siswa.save', isset($siswa) ? Crypt::encrypt($siswa->id_siswa) : null) }}" method="POST">
                                 @csrf
 
+                                {{-- NISN --}}
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">NISN <span class="text-danger">*</span></label>
                                     <input type="text" name="nisn" class="form-control @error('nisn') is-invalid @enderror"
@@ -33,6 +34,7 @@
                                     @error('nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
+                                {{-- Nama --}}
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
                                     <input type="text" name="nama_siswa" class="form-control @error('nama_siswa') is-invalid @enderror"
@@ -40,13 +42,29 @@
                                     @error('nama_siswa') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
 
+                                {{-- KELAS (ambil dari tabel kelas) --}}
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Kelas <span class="text-danger">*</span></label>
+                                    <select name="id_kelas" class="form-control @error('id_kelas') is-invalid @enderror" required>
+                                        <option value="">-- Pilih Kelas --</option>
+                                        @foreach ($kelas as $k)
+                                            <option value="{{ $k->id_kelas }}"
+                                                {{ old('id_kelas', $siswa->id_kelas ?? '') == $k->id_kelas ? 'selected' : '' }}>
+                                                {{ $k->nama_kelas }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_kelas') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+
+                                {{-- Jenis Kelamin --}}
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Jenis Kelamin <span class="text-danger">*</span></label>
                                     <div style="display: flex; gap: 30px; align-items: center;">
                                         <label style="cursor: pointer; font-weight: normal; margin-bottom: 0;">
-                                            <input type="radio" name="jenis_kelamin" value="Laki-Laki"
-                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin ?? 'Laki-Laki') == 'Laki-Laki' ? 'checked' : '' }} required>
-                                            Laki-Laki
+                                            <input type="radio" name="jenis_kelamin" value="Laki-laki"
+                                                {{ old('jenis_kelamin', $siswa->jenis_kelamin ?? 'Laki-laki') == 'Laki-laki' ? 'checked' : '' }} required>
+                                            Laki-laki
                                         </label>
                                         <label style="cursor: pointer; font-weight: normal; margin-bottom: 0;">
                                             <input type="radio" name="jenis_kelamin" value="Perempuan"
@@ -57,6 +75,7 @@
                                     @error('jenis_kelamin') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
+                                {{-- Tahun Masuk --}}
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Tahun Masuk <span class="text-danger">*</span></label>
                                     <input type="number" name="tahun_masuk" class="form-control @error('tahun_masuk') is-invalid @enderror"

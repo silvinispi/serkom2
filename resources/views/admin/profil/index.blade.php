@@ -90,13 +90,12 @@
                                             <i class="icofont icofont-ui-home"></i> NPSN: {{ $profil->npsn ?? '-' }}
                                         </p>
 
-                                    @if (Auth::check() && strcasecmp(Auth::user()->role, 'admin') === 0)
                                         @if ($profil && $profil->id_profil)
                                             <a href="{{ route('admin.profil.edit', Crypt::encrypt($profil->id_profil)) }}"
                                                 class="btn btn-primary btn-sm">
                                                 <i class="icofont icofont-edit"></i> Edit Profil
                                             </a>
-                                        @endif
+                                        
                                     @endif
                                     </div>
                                 </div>

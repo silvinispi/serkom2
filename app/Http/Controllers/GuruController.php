@@ -141,14 +141,14 @@ class GuruController extends Controller
     public function guruPublic()
     {
         $title = 'Guru & Staf';
-        $guru = \App\Models\Guru::latest()->get();
+        $guru = Guru::latest()->get();
 
         return view('public.guru.guru', compact('title', 'guru'));
     }
 
     public function guruShowPublic($slug)
     {
-        $guru = \App\Models\Guru::where('slug', $slug)->firstOrFail();
+        $guru = Guru::where('slug', $slug)->firstOrFail();
 
         $title = $guru->nama_guru;
 

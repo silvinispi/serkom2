@@ -1,5 +1,5 @@
 @extends('layouts.landing')
-@section('title', 'Profil')
+@section('title', 'Profil Sekolah')
 @section('content')
 
     <section class="container py-5" data-aos="fade-up" data-aos-delay="100">
@@ -20,20 +20,20 @@
                 <p class="text-muted mb-0">NPSN: {{ $profil->npsn ?? '-' }}</p>
             </div>
         </div>
-        <hr>
+
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="row g-4 ">
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                         @if ($profil->foto && file_exists(public_path('assets/admin/images/' . $profil->foto)))
                             <img src="{{ asset('assets/admin/images/' . $profil->foto) }}"
-                                alt="{{ $profil->kepala_sekolah }}" class="img-fluid rounded-4 shadow-sm w-100"
-                                style="object-fit: cover; width:50px: height: 30px;">
+                                alt="{{ $profil->kepala_sekolah }}" class="img-fluid rounded-4 shadow-sm mx-auto d-block"
+                                style="max-width: 280px;">
                         @else
-                            <div class="d-flex align-items-center justify-content-center bg-secondary bg-opacity-25 rounded-4"
-                                style="aspect-ratio: 1/1;">
-                                <i class="fa-solid fa-user text-muted" style="font-size: 100px;"></i>
+                            <div class="d-flex align-items-center justify-content-center bg-secondary bg-opacity-25 rounded-4 mx-auto"
+                                style="width: 280px; height: 373px;">
+                                <i class="fa-solid fa-user text-muted" style="font-size: 80px;"></i>
                             </div>
                         @endif
                     </div>
